@@ -3,11 +3,14 @@ const app = express()
 const { MongoClient } = require('mongodb');
 var cors = require('cors')
 require('dotenv').config()
+var cloudinary = require('cloudinary').v2
 const port = process.env.PORT || 5000
 const ObjectId=require("mongodb").ObjectId;
 const stripe = require("stripe")(process.env.PAYMENT_STRIPE_SECRETE_KEY);
-const fileupload=require('express-fileupload')
+const fileupload = require('express-fileupload')
+const multer = require('multer')
 app.use(cors())
+
 app.use(express.json())
 app.use(fileupload())
 
@@ -15,6 +18,16 @@ app.use(fileupload())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lp6z6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+
+
+
+
+
+
+
+
 
 
 async function run(){
@@ -25,15 +38,14 @@ async function run(){
         const users = database.collection("users");
         const orders = database.collection("orders");
         const reviews = database.collection("reviews");
-        app.post("/addproduct",async(req,res)=>{
+      
+      app.post("/addproduct",async (req, res) => {
+       
+        
            const name=req.body.name;
-           
            const price=req.body.price;
            const description=req.body.description;
-           const img=req.files.img;
-           const picdata=img.data;
-           const encodedimage=picdata.toString('base64');
-           const image=Buffer.from(encodedimage,'base64');
+           const image=req.body.image
          
            const myproduct={
              name,
