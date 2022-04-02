@@ -34,7 +34,8 @@ async function run(){
     try{
         await client.connect();
         const database = client.db("automantia");
-        const products = database.collection("products");
+      const products = database.collection("products");
+      const blogs = database.collection("blogs");
         const users = database.collection("users");
         const orders = database.collection("orders");
         const reviews = database.collection("reviews");
@@ -238,6 +239,41 @@ async function run(){
         console.log(result);
      })
 
+      //////blog section route
+      
+      app.post("/addblog", async (req, res) => {
+
+
+        const name = req.body.name;
+        const subtitle = req.body.subtitle;
+        const description = req.body.description;
+        const image = req.body.image
+
+        const myblog = {
+          name,
+          subtitle,
+          img: image,
+          description
+        }
+
+
+        const query = { name: name }
+        const findblog = await blogs.findOne(query);
+
+        if (findblog == null) {
+          const result = await blogs.insertOne(myblog);
+          res.send(result);
+
+        } else {
+          res.send(false)
+        }
+
+      });
+
+      app.get("/blogs", async (req, res) => {
+        const result = await blogs.find({}).toArray();
+        res.send(result)
+      });
 
         
     }finally{
