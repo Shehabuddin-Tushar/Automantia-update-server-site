@@ -275,6 +275,24 @@ async function run(){
         res.send(result)
       });
 
+
+      app.get("/reviewbyid/:id", async (req, res) => {
+        const myid = req.params.id;
+       
+        const query = { _id: ObjectId(myid) }
+        const result = await reviews.findOne(query)
+        res.send(result)
+      });
+
+
+      app.get("/blogbyid/:id", async (req, res) => {
+        const myid = req.params.id;
+
+        const query = { _id: ObjectId(myid) }
+        const result = await blogs.findOne(query)
+        res.send(result)
+      });
+
         
     }finally{
 
