@@ -38,7 +38,9 @@ async function run(){
       const blogs = database.collection("blogs");
         const users = database.collection("users");
         const orders = database.collection("orders");
-        const reviews = database.collection("reviews");
+      const reviews = database.collection("reviews");
+      
+      
       
       app.post("/addproduct",async (req, res) => {
        
@@ -69,7 +71,9 @@ async function run(){
            
            });
   
-        
+      app.get("/p", (req,res) => {
+          res.json({"name":"tushar"})
+        })
 
         app.get("/products",async(req,res)=>{
             const result=await products.find({}).toArray();
