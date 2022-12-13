@@ -71,9 +71,7 @@ async function run(){
            
            });
   
-      app.get("/p", (req,res) => {
-          res.json({"name":"tushar"})
-        })
+      
 
         app.get("/products",async(req,res)=>{
             const result=await products.find({}).toArray();
@@ -310,6 +308,10 @@ run().catch(err=>console.log(err))
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
+})
+
+app.get("/p", (req, res) => {
+  res.json({ "name": "tushar" })
 })
 
 app.listen(port, () => {
