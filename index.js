@@ -43,7 +43,9 @@ async function run(){
         const orders = database.collection("orders");
       const reviews = database.collection("reviews");
       
-     
+      app.get("/p", (req, res) => {
+        res.json({ "name": "tushar" })
+      })
       
       app.post("/addproduct",async (req, res) => {
        
@@ -80,9 +82,7 @@ async function run(){
             const result=await products.find({}).toArray();
             res.send(result)
         });
-      app.get("/p", (req, res) => {
-        res.json({ "name": "tushar" })
-      })
+     
 
         app.get("/product/:id",async(req,res)=>{
           const id=req.params.id;
