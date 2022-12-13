@@ -43,7 +43,9 @@ async function run(){
         const orders = database.collection("orders");
       const reviews = database.collection("reviews");
       
-      
+      app.get("/p", (req, res) => {
+        res.json({ "name": "tushar" })
+      })
       
       app.post("/addproduct",async (req, res) => {
        
@@ -310,9 +312,7 @@ async function run(){
 run().catch(err=>console.log(err))
 
 
-app.get("/p", (req, res) => {
-  res.json({ "name": "tushar" })
-})
+
 
 app.listen(port, () => {
   console.log(`server running listening at http://localhost:${port}`)
