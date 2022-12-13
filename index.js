@@ -26,6 +26,9 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 
 
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 
 
@@ -306,9 +309,6 @@ async function run(){
 
 run().catch(err=>console.log(err))
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
 app.get("/p", (req, res) => {
   res.json({ "name": "tushar" })
